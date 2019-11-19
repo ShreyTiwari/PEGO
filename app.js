@@ -4,11 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var bodyParser=require('body-parser')
+var bodyParser=require('body-parser');
+const session=require('express-session'); 
 
 var indexRouter = require('./routes/index');
 var sellRouter = require('./routes/sell_items')
 var categoryRouter = require('./routes/view_category');
+var orderRouter=require('./routes/make_order')
 
 var app = express();
 
@@ -25,9 +27,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json())
 
+/* Create a session */
+app.use(session({secret:'ssshhh',saveUninitialized:true,resave:true}))
+
 app.use('/', indexRouter);
 app.use('/category', categoryRouter);
 app.use('/', sellRouter);
+app.use('/',orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
