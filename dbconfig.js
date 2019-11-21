@@ -1,3 +1,6 @@
+/**
+ * File to make a connection to the backend MySQL database.
+ */
 var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "localhost",
@@ -7,12 +10,12 @@ var con = mysql.createConnection({
   database:'pego'
 });
 
- //Setup a connection
- con.connect(function (req, res, err) {
-  if (err){
-    res.status(400).send('Error in connecting');
-  }
-  console.log("Connected!");
-  });
+//Setup a connection
+con.connect(function (req, res, err) {
+if (err){
+  res.status(400).send('Error in connecting');
+}
+console.log("Connected!");
+});
 
 module.exports=con;
